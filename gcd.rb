@@ -71,7 +71,3 @@ def go_beaver_go()
     puts
   end
 end
-
-if __FILE__ == $0
-  go_beaver_go
-end
