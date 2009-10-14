@@ -1,4 +1,15 @@
 #!/usr/bin/env ruby
+###############################################################################
+# GCD and a little more
+#
+# ./gcd --help
+#
+# For the practice session feature you need the HighLine library installed.
+#
+#  gem install highline
+#
+# Matan Nassau <matan.nassau@gmail.com>
+###############################################################################
 
 require 'options'
 
@@ -17,18 +28,44 @@ def extended_euclidean(n,m,opts)
   return [i,j,gcd]
 end
 
+def practice(opts)
+  require 'highline/system_extensions'
+  include HighLine::SystemExtensions
+  srand(Time.now.to_i)
+  c = 0
+  while c != 'q'.ord
+    a, b = 0, 0
+    a = rand(10000) while a % 2 == 0
+    b = rand(10000) while b % 2 == 0
+    puts "q to quit, any other key for the solution and another round."
+    puts '+-' + "a=#{a}, b=#{b}".gsub(/./, '-') + '-+'
+    puts "| a=#{a}, b=#{b} |"
+    puts '+-' + "a=#{a}, b=#{b}".gsub(/./, '-') + '-+'
+    break if get_character() == 'q'.ord
+    inv,k,gcd = extended_euclidean(a,b,opts)
+    if inv < 0 and opts.extended and opts.trace
+      puts "#{inv}mod#{b}=#{inv%b}"
+    end
+    puts "gcd=#{gcd}, #{a}^-1 mod #{b}=#{inv % b}"
+  end
+end
+
 # main entry
 def go_beaver_go()
   options = parse_commandline_options
-  a = options.a || gets.to_i
-  b = options.b || gets.to_i
-  inv,k,gcd = extended_euclidean(a,b,options)
-  if inv < 0 and options.extended and options.trace
-    puts "#{inv}mod#{b}=#{inv%b}"
+  if options.practice
+    practice(options)
+  else
+    a = options.a || gets.to_i
+    b = options.b || gets.to_i
+    inv,k,gcd = extended_euclidean(a,b,options)
+    if inv < 0 and options.extended and options.trace
+      puts "#{inv}mod#{b}=#{inv%b}"
+    end
+    print gcd
+    print ' ', inv % b if options.extended
+    puts
   end
-  print gcd
-  print ' ', inv % b if options.extended
-  puts
 end
 
 if __FILE__ == $0
