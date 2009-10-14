@@ -46,7 +46,9 @@ def practice(opts)
     if inv < 0 and opts.extended and opts.trace
       puts "#{inv}mod#{b}=#{inv%b}"
     end
-    puts "gcd=#{gcd}, #{a}^-1 mod #{b}=#{inv % b}"
+    print "gcd=#{gcd}"
+    print ", #{a}^-1 mod #{b}=#{inv % b}" if opts.extended
+    puts
   end
 end
 
