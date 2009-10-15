@@ -1,4 +1,16 @@
 #!/usr/bin/env ruby
+###############################################################################
+# GCD and a little more
+#
+# ./gcd --help
+#
+# For the practice session feature you need the HighLine library installed.
+#
+#  gem install highline
+#
+# Matan Nassau <matan.nassau@gmail.com>
+###############################################################################
+
 
 if __FILE__ == $0
   require 'gcd'
