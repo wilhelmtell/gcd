@@ -17,6 +17,7 @@ ERR_INTERRUPT = 1
 # returns [i,j,gcd] s.t. i*n+j*m=1
 def extended_euclidean(n,m,opts)
   if m == 0
+    puts if opts.extended and opts.trace
     return 1,0,n
   end
   if opts.trace
