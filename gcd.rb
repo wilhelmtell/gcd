@@ -13,6 +13,8 @@
 
 require 'options'
 
+ERR_INTERRUPT = 1
+
 # returns [i,j,gcd] s.t. i*n+j*m=1
 def extended_euclidean(n,m,opts)
   if m == 0
@@ -43,7 +45,11 @@ def practice(opts)
     puts '+-' + "a=#{a}, b=#{b}".gsub(/./, '-') + '-+'
     puts "| a=#{a}, b=#{b} |"
     puts '+-' + "a=#{a}, b=#{b}".gsub(/./, '-') + '-+'
-    break if get_character() == 'q'.ord
+    begin
+      break if get_character() == 'q'.ord
+    rescue Interrupt
+      exit ERR_INTERRUPT
+    end
     inv,k,gcd = extended_euclidean(a,b,opts)
     if inv < 0 and opts.extended and opts.trace
       puts "#{inv}mod#{b}=#{inv%b}"
@@ -60,8 +66,12 @@ def go_beaver_go()
   if options.practice
     practice(options)
   else
-    a = options.a || gets.to_i
-    b = options.b || gets.to_i
+    begin
+      a = options.a || gets.to_i
+      b = options.b || gets.to_i
+    rescue Interrupt
+      exit ERR_INTERRUPT
+    end
     inv,k,gcd = extended_euclidean(a,b,options)
     if inv < 0 and options.extended and options.trace
       puts "#{inv}mod#{b}=#{inv%b}"

@@ -35,4 +35,3 @@ def parse_commandline_options()
   end.parse!
   return options
 end
-
