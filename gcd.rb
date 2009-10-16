@@ -20,15 +20,22 @@ ERR_INTERRUPT = 1
 def extended_euclidean(n,m,opts)
   if m == 0
     if opts.extended and opts.trace
-      puts "gcd(#{opts.a},#{opts.b}) is #{n}", nil
+      a,b = opts.a, opts.b
+      puts "gcd(#{a},#{b}) is #{n}"
+      if n != 1
+        puts "#{a}^-1 mod #{b} doesn't exist since #{a} and #{b} aren't coprimes."
+      end
+      puts
     end
     return 1,0,n
   end
   puts "#{n}=#{n/m}*#{m}+#{n%m}" if opts.trace
   i,j,gcd = extended_euclidean(m, n%m, opts)
-  i,j = j, i-((n/m)*j)
-  if opts.trace and opts.extended and n%m != 0
-    puts "#{gcd}=#{i}*#{n}#{j<0 ? '' : '+'}#{j}*#{m}"
+  if gcd == 1
+    i,j = j, i-((n/m)*j)
+    if opts.trace and opts.extended and n%m != 0
+      puts "#{gcd}=#{i}*#{n}#{j<0 ? '' : '+'}#{j}*#{m}"
+    end
   end
   return [i,j,gcd]
 end
@@ -80,7 +87,7 @@ def go_beaver_go()
       puts "#{inv}mod#{b}=#{inv%b}"
     end
     print gcd
-    print ' ', inv % b if options.extended
+    print ' ', inv % b if options.extended and gcd == 1
     puts
   end
 end
