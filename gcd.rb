@@ -15,18 +15,21 @@ require 'options'
 ERR_INTERRUPT = 1
 
 # returns [i,j,gcd] s.t. i*n+j*m=1
+#
+# TODO: check if stdout is a tty and output accordingly
 def extended_euclidean(n,m,opts)
   if m == 0
-    puts if opts.extended and opts.trace
+    if opts.extended and opts.trace
+      puts "gcd(#{opts.a},#{opts.b}) is #{n}", nil
+    end
     return 1,0,n
   end
-  if opts.trace
-    f = n / m
-    puts "#{n}=#{f}*#{m}+#{n%m}"
+  puts "#{n}=#{n/m}*#{m}+#{n%m}" if opts.trace
+  i,j,gcd = extended_euclidean(m, n%m, opts)
+  i,j = j, i-((n/m)*j)
+  if opts.trace and opts.extended and n%m != 0
+    puts "#{gcd}=#{i}*#{n}#{j<0 ? '' : '+'}#{j}*#{m}"
   end
-  i,j,gcd = extended_euclidean(m,n%m,opts)
-  i,j,gcd = j, i-((n/m)*j), gcd
-  puts "#{gcd}=#{i}*#{n}+#{j}*#{m}" if opts.trace and opts.extended
   return [i,j,gcd]
 end
 
