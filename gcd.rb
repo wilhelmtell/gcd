@@ -38,12 +38,12 @@ def practice(opts)
   include HighLine::SystemExtensions
   srand(Time.now.to_i)
   c = 0
+  a, b = 0, 0
   while c != 'q'.ord
-    a, b = 0, 0
     al,au = opts.arange.first, opts.arange.last
     bl,bu = opts.brange.first, opts.brange.last
-    a = rand(au) % (au - al + 1) + al while a % 2 == 0
-    b = rand(bu) % (bu - bl + 1) + bl while b % 2 == 0
+    opts.a = a = rand(au) % (au - al + 1) + al while a % 2 == 0
+    opts.b = b = rand(bu) % (bu - bl + 1) + bl while b % 2 == 0
     puts "q to quit, any other key for the solution and another round."
     puts '+-' + "a=#{a}, b=#{b}".gsub(/./, '-') + '-+'
     puts "| a=#{a}, b=#{b} |"
