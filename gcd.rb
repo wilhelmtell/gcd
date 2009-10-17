@@ -45,8 +45,8 @@ def practice(opts)
   include HighLine::SystemExtensions
   srand(Time.now.to_i)
   c = 0
-  a, b = 0, 0
   while c != 'q'.ord
+    a, b = 0, 0
     al,au = opts.arange.first, opts.arange.last
     bl,bu = opts.brange.first, opts.brange.last
     opts.a = a = rand(au) % (au - al + 1) + al while a % 2 == 0
