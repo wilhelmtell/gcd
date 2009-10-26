@@ -29,7 +29,7 @@ def extended_euclidean(n,m,opts)
     end
     return 1,0,n
   end
-  puts "#{n}=#{n/m}*#{m}+#{n%m}" if opts.trace
+  puts "#{n}=#{n/m}*#{m}+#{n%m}" if opts.trace and n%m != 0
   i,j,gcd = extended_euclidean(m, n%m, opts)
   if gcd == 1
     i,j = j, i-((n/m)*j)
@@ -65,7 +65,10 @@ def practice(opts)
       puts "#{inv}mod#{b}=#{inv%b}"
     end
     print "gcd=#{gcd}"
-    print ", #{a}^-1 mod #{b}=#{inv % b}" if opts.extended
+    if opts.extended
+      print ", #{a}^-1 mod #{b}=#{inv % b}"
+      print "\nCheck:  #{a} * #{inv % b} mod #{b} = #{a*(inv%b)} mod #{b} = #{a * (inv%b) % b}"
+    end
     puts
   end
 end
