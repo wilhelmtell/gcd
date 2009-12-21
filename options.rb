@@ -33,5 +33,9 @@ def parse_commandline_options()
       options.b = v
     end
   end.parse!
+  if ARGV.length > 1 and options.a.nil? and options.b.nil?
+    options.a = ARGV[0].to_i
+    options.b = ARGV[1].to_i
+  end
   return options
 end
