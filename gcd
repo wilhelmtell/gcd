@@ -13,6 +13,6 @@
 
 
 if __FILE__ == $0
-  require 'gcd'
+  require_relative 'gcd'
   go_beaver_go
 end

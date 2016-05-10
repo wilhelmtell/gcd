@@ -10,7 +10,7 @@
 # Matan Nassau <matan.nassau@gmail.com>
 ###############################################################################
 
-require 'options'
+require_relative 'options'
 
 ERR_INTERRUPT = 1
 
