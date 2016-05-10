@@ -1,3 +1,15 @@
 gcd - The Euclidean Greatest Common Denominator algorithm and more
 
 Just for practice and fun.
+
+
+ EXAMPLES
+
+ $ ./gcd 140 1608
+ 4
+
+ $ ./gcd --trace 140 1608
+ 140=0*1608+140
+ 1608=11*140+68
+ 140=2*68+4
+ 4
